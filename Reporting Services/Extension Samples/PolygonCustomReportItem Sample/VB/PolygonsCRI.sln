@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PolygonsDesigner", "PolygonsDesigner\PolygonsDesigner.vbproj", "{64E488BB-2068-4694-BA3E-A78AAA0A4292}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "PolygonsCRI", "PolygonsCRI\PolygonsCRI.vbproj", "{30CF493A-ADE4-4EAB-9AAD-796C771B39BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64E488BB-2068-4694-BA3E-A78AAA0A4292}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64E488BB-2068-4694-BA3E-A78AAA0A4292}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64E488BB-2068-4694-BA3E-A78AAA0A4292}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64E488BB-2068-4694-BA3E-A78AAA0A4292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30CF493A-ADE4-4EAB-9AAD-796C771B39BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30CF493A-ADE4-4EAB-9AAD-796C771B39BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30CF493A-ADE4-4EAB-9AAD-796C771B39BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30CF493A-ADE4-4EAB-9AAD-796C771B39BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

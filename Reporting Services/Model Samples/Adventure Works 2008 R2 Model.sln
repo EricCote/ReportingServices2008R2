@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{999D2CB9-9277-4465-A902-1604ED3686A3}") = "Adventure Works 2008 R2 Model", "Adventure Works 2008 R2 Model\Adventure Works 2008 R2 Model.smdlproj", "{EB0F02BF-B50F-4010-A630-1FFB204E887B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Production|Default = Production|Default
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB0F02BF-B50F-4010-A630-1FFB204E887B}.Production|Default.ActiveCfg = Production
+		{EB0F02BF-B50F-4010-A630-1FFB204E887B}.Production|Default.Build.0 = Production
+		{EB0F02BF-B50F-4010-A630-1FFB204E887B}.Production|Default.Deploy.0 = Production
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

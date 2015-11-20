@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="PolygonsData">
+      <DataSourceReference>PolygonsData</DataSourceReference>
+      <rd:DataSourceID>5d7e04e8-ba74-4eb1-9cf6-50f75dde3ff5</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Fields>
+        <Field Name="Object">
+          <DataField>Object</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Color">
+          <DataField>Color</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Point">
+          <DataField>Point</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="X">
+          <DataField>X</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Y">
+          <DataField>Y</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>PolygonsData</DataSourceName>
+        <CommandText>select 1 as Object, 'Red' as Color, 1 as Point, 75 as X, 75 as Y
+union
+select 1, 'Red', 2, 75, 175
+union
+select 1, 'Red', 3, 175, 175
+union
+select 1, 'Red', 4, 175, 75
+union
+select 2, 'Blue', 1, 75, 25
+union
+select 2, 'Blue', 2, 25, 112
+union
+select 2, 'Blue', 3, 125, 112</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+    <DataSet Name="DataSet2">
+      <Fields>
+        <Field Name="Object">
+          <DataField>Object</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="Point">
+          <DataField>Point</DataField>
+          <rd:TypeName>System.Int16</rd:TypeName>
+        </Field>
+        <Field Name="X">
+          <DataField>X</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Y">
+          <DataField>Y</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>PolygonsData</DataSourceName>
+        <CommandText>select uid as Object, sysstat as Point, sum(datepart(hh,crdate)) % 20 as X, sum(datepart(ss,crdate)) % 20 as Y from sysobjects
+group by uid, sysstat
+order by uid, sysstat</CommandText>
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <CustomReportItem Name="customReportItem1">
+        <Type>Polygons</Type>
+        <CustomData>
+          <DataSetName>DataSet1</DataSetName>
+          <DataColumnHierarchy>
+            <DataMembers>
+              <DataMember />
+            </DataMembers>
+          </DataColumnHierarchy>
+          <DataRowHierarchy>
+            <DataMembers>
+              <DataMember>
+                <Group Name="Object">
+                  <GroupExpressions>
+                    <GroupExpression>=Fields!Object.Value</GroupExpression>
+                  </GroupExpressions>
+                </Group>
+                <CustomProperties>
+                  <CustomProperty>
+                    <Name>poly:Color</Name>
+                    <Value>=Fields!Color.Value</Value>
+                  </CustomProperty>
+                  <CustomProperty>
+                    <Name>poly:Hyperlink</Name>
+                    <Value>http://microsoft.com</Value>
+                  </CustomProperty>
+                </CustomProperties>
+                <DataMembers>
+                  <DataMember>
+                    <Group Name="Point">
+                      <GroupExpressions>
+                        <GroupExpression>=Fields!Point.Value</GroupExpression>
+                      </GroupExpressions>
+                    </Group>
+                    <SortExpressions>
+                      <SortExpression>
+                        <Value>=Fields!Point.Value</Value>
+                      </SortExpression>
+                    </SortExpressions>
+                  </DataMember>
+                </DataMembers>
+              </DataMember>
+            </DataMembers>
+          </DataRowHierarchy>
+          <DataRows>
+            <DataRow>
+              <DataCell>
+                <DataValue>
+                  <Name>X</Name>
+                  <Value>=Fields!X.Value</Value>
+                </DataValue>
+                <DataValue>
+                  <Name>Y</Name>
+                  <Value>=Fields!Y.Value</Value>
+                </DataValue>
+              </DataCell>
+            </DataRow>
+          </DataRows>
+        </CustomData>
+        <Top>0.125in</Top>
+        <Left>0.125in</Left>
+        <Height>2in</Height>
+        <Width>3.25in</Width>
+        <CustomProperties>
+          <CustomProperty>
+            <Name>poly:MaxX</Name>
+            <Value>=Max(Fields!X.Value,"DataSet1")+iif(Min(Fields!X.Value,"DataSet1")&gt;0,Min(Fields!X.Value,"DataSet1"),0)</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MinX</Name>
+            <Value>=iif(Min(Fields!X.Value,"DataSet1")&gt;0,0,Min(Fields!X.Value,"DataSet1"))</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MaxY</Name>
+            <Value>=Max(Fields!Y.Value,"DataSet1")+iif(Min(Fields!Y.Value,"DataSet1")&gt;0,Min(Fields!Y.Value,"DataSet1"),0)</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MinY</Name>
+            <Value>=iif(Min(Fields!Y.Value,"DataSet1")&gt;0,0,Min(Fields!Y.Value,"DataSet1"))</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:Translucent</Name>
+            <Value>Opaque</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:Proportional</Name>
+            <Value>True</Value>
+          </CustomProperty>
+        </CustomProperties>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <BackgroundColor>Green</BackgroundColor>
+          <Color>Red</Color>
+        </Style>
+      </CustomReportItem>
+      <CustomReportItem Name="customReportItem2">
+        <Type>Polygons</Type>
+        <CustomData>
+          <DataSetName>DataSet2</DataSetName>
+          <DataColumnHierarchy>
+            <DataMembers>
+              <DataMember />
+            </DataMembers>
+          </DataColumnHierarchy>
+          <DataRowHierarchy>
+            <DataMembers>
+              <DataMember>
+                <Group Name="Poly2_Object">
+                  <GroupExpressions>
+                    <GroupExpression>=Fields!Object.Value</GroupExpression>
+                  </GroupExpressions>
+                </Group>
+                <CustomProperties>
+                  <CustomProperty>
+                    <Name>poly:Color</Name>
+                    <Value>="#" + CInt(Rnd()*16777215).ToString("X6")</Value>
+                  </CustomProperty>
+                  <CustomProperty>
+                    <Name>poly:Hyperlink</Name>
+                    <Value />
+                  </CustomProperty>
+                </CustomProperties>
+                <DataMembers>
+                  <DataMember>
+                    <Group Name="Poly2_Point">
+                      <GroupExpressions>
+                        <GroupExpression>=Fields!Point.Value</GroupExpression>
+                      </GroupExpressions>
+                    </Group>
+                  </DataMember>
+                </DataMembers>
+              </DataMember>
+            </DataMembers>
+          </DataRowHierarchy>
+          <DataRows>
+            <DataRow>
+              <DataCell>
+                <DataValue>
+                  <Name>X</Name>
+                  <Value>=Fields!X.Value</Value>
+                </DataValue>
+                <DataValue>
+                  <Name>Y</Name>
+                  <Value>=Fields!Y.Value</Value>
+                </DataValue>
+              </DataCell>
+            </DataRow>
+          </DataRows>
+        </CustomData>
+        <Top>0.125in</Top>
+        <Left>3.5in</Left>
+        <Height>2in</Height>
+        <Width>3.25in</Width>
+        <ZIndex>1</ZIndex>
+        <CustomProperties>
+          <CustomProperty>
+            <Name>poly:MaxX</Name>
+            <Value>=Max(Fields!X.Value,"DataSet2")+iif(Min(Fields!X.Value,"DataSet2")&gt;0,Min(Fields!X.Value,"DataSet2"),0)</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MinX</Name>
+            <Value>=iif(Min(Fields!X.Value,"DataSet2")&gt;0,0,Min(Fields!X.Value,"DataSet2"))</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MaxY</Name>
+            <Value>=Max(Fields!Y.Value,"DataSet2")+iif(Min(Fields!Y.Value,"DataSet2")&gt;0,Min(Fields!Y.Value,"DataSet2"),0)</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:MinY</Name>
+            <Value>=iif(Min(Fields!Y.Value,"DataSet2")&gt;0,0,Min(Fields!Y.Value,"DataSet2"))</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:Translucent</Name>
+            <Value>Opaque</Value>
+          </CustomProperty>
+          <CustomProperty>
+            <Name>poly:Proportional</Name>
+            <Value>False</Value>
+          </CustomProperty>
+        </CustomProperties>
+        <Style>
+          <Border>
+            <Style>Solid</Style>
+          </Border>
+          <BackgroundColor>Green</BackgroundColor>
+          <Color>Blue</Color>
+        </Style>
+      </CustomReportItem>
+    </ReportItems>
+    <Height>5.25in</Height>
+    <Style />
+  </Body>
+  <Code>protected overrides sub OnInit()
+	Randomize()
+end sub
+</Code>
+  <Width>9.875in</Width>
+  <Page>
+    <LeftMargin>1in</LeftMargin>
+    <RightMargin>1in</RightMargin>
+    <TopMargin>1in</TopMargin>
+    <BottomMargin>1in</BottomMargin>
+    <Style />
+  </Page>
+  <Language>en-US</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportID>2ece3291-f1c9-4139-9a19-ec60146d0036</rd:ReportID>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+</Report>
